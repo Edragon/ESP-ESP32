@@ -1,0 +1,40 @@
+1.致谢。
+
+2.下载资料。
+
+资料复制网盘链接下载：http://pan.baidu.com/s/1nvFfIeX 密码：bccc
+
+3.认识资料。
+3.1 硬件连接
+
+3.2资料介绍
+
+4.搭建开发环境，编译下载程序。
+（1）解压虚拟机（编译环境）到想要解压的盘，最好解压到根目录，esp32_win32_msys2_environment_and_toolchain-20170111.zip。
+比如直接解压到d盘后，
+D:\msys32
+（2）解压例程文件（esp32-dir.zip）到想要的目录里面。最好解压到虚拟机的目录，因为方面查找。
+比如解压到虚拟机的盘里面：
+D:\msys32\esp32-dir
+
+（3）双击编译环境里面的文件msys2_shell.cmd ，就好弹出对话框。
+
+（4）设置环境变量，为编译做准备。
+export IDF_PATH="d:/msys32/esp32-dir/esp-idf"
+
+（5）开始编译：
+
+转到相应的目录。
+make menuconfig    ---->主要配置COM口
+
+make flash         ----->编译完成后，会自动下载，前提是硬件连接好。
+
+
+5.编译生成的文件，确切的说是bin文件。
+
+（1）bootloader.bin
+
+（2）分区表。
+
+（3）应用程序。
+
