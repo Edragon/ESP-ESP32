@@ -1,0 +1,60 @@
+1.地址内存映射、分布。
+（1）内存的种类。
+520 KB 片上SRAM
+448 KB 的ROM---------->没法修改的代码，已经固化死了。
+ESP-WROOM-32 集成了4 MB 的SPI Flash
+
+
+（2）地址分布。
+了解，知道调函数的时候是怎么操作到寄存器了。
+
+
+2.启动过程。
+注：参考地址---->esp-idf/docs/general-notes.rst
+
+怎么从上电到运行到你自己写的代码的过程。
+
+（1）启动过程。
+第一阶段的bootloader去加载第二阶段的bootloader，第一阶段的固化在ROM里面，第二阶段在SPI flash里面的地址是0x1000这个地址里面，第二阶段的bootloader加载APP，
+app是放在0x10000这个地方。最终调用到app_main这个函数。
+
+app的调用过程：
+
+		start_cpu0_default
+				 xTaskCreatePinnedToCore(&main_task, "main",
+		            ESP_TASK_MAIN_STACK, NULL,
+		            ESP_TASK_MAIN_PRIO, NULL, 0);
+		        			
+		        	main_task
+		        			app_main
+
+（2）分区的作用？
+启动和升级。
+启动过程中，通过分区表可以知道APP放的地址位置。
+
+网络升级，网络升级的时候也可以根据这个分区表，把你的要升级的程序放到对应flash里面。
+
+3.二次开发流程。
+（1）参考组合。
+参考例程
+
+参考API手册
+
+怎么写ADC程序？
+---------------------------------------------------------------
+
+adc1_config_channel_atten---->配置要使用的ADC通道
+		adc1_pad_init ------->初始化adc引脚。
+
+adc1_config_width---->配置转换精度
+
+adc1_get_voltage----->读取转换电压
+
+------------------------------------------------------------
+
+
+
+
+
+（2）调试。
+调试组合结果。
